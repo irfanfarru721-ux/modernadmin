@@ -1,3 +1,1 @@
-export default function Dashboard() {
-  return <h1 style={{textAlign:"center", marginTop:50}}>Admin Dashboard</h1>;
-};
+export default function Dashboard(){return <div>Dashboard</div>};
