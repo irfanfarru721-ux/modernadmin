@@ -1,0 +1,3 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+export default function Header(){ const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null; return (<header className='header'><div><Link to='/dashboard' style={{color:'#fff',textDecoration:'none'}}>Admin</Link> {token && <><Link to='/vendors' style={{color:'#fff',marginLeft:12}}>Vendors</Link> <Link to='/products' style={{color:'#fff',marginLeft:12}}>Products</Link> <Link to='/categories' style={{color:'#fff',marginLeft:12}}>Categories</Link></>}</div><div>{token ? <button className='btn' onClick={()=>{localStorage.removeItem('adminToken'); window.location.href='/admin/login'}}>Logout</button> : <Link to='/admin/login' className='btn'>Login</Link>}</div></header>); }
