@@ -1,1 +1,57 @@
-import React,useState from 'react'; import API from '../services/api'; import {useNavigate} from 'react-router-dom'; export default function AddVendor(){ const [form,setForm]=useState({name:'',type:'restaurant',address:''}); const nav=useNavigate(); const submit=async(e)=>{ e.preventDefault(); await API.post('/admin/vendors',form).catch(console.error); nav('/vendors'); }; return (<div><h1>Add Vendor</h1><form className='card' onSubmit={submit}><input placeholder='Name' value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required/><select value={form.type} onChange={e=>setForm({...form,type:e.target.value})}><option value='restaurant'>Restaurant</option><option value='grocery'>Grocery</option></select><input placeholder='Address' value={form.address} onChange={e=>setForm({...form,address:e.target.value})}/><button className='btn' type='submit'>Create</button></form></div>); }
+import React, { useState } from "react";
+import API from "../services/api";
+import { useNavigate } from "react-router-dom";
+
+export default function AddVendor() {
+  const [form, setForm] = useState({
+    name: "",
+    type: "restaurant",
+    address: ""
+  });
+
+  const nav = useNavigate();
+
+  const submit = async (e) => {
+    e.preventDefault();
+    try {
+      await API.post("/admin/vendors", form);
+      nav("/vendors");
+    } catch (err) {
+      console.error(err);
+      alert("Error creating vendor");
+    }
+  };
+
+  return (
+    <div>
+      <h1>Add Vendor</h1>
+
+      <form className="card" onSubmit={submit}>
+        <input
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          required
+        />
+
+        <select
+          value={form.type}
+          onChange={(e) => setForm({ ...form, type: e.target.value })}
+        >
+          <option value="restaurant">Restaurant</option>
+          <option value="grocery">Grocery</option>
+        </select>
+
+        <input
+          placeholder="Address"
+          value={form.address}
+          onChange={(e) => setForm({ ...form, address: e.target.value })}
+        />
+
+        <button className="btn" type="submit">
+          Create
+        </button>
+      </form>
+    </div>
+  );
+}
