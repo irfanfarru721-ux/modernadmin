@@ -1,1 +1,0 @@
-export default function Topbar(){return <div style={{height:50,background:'#ddd'}}>Admin Panel</div>};
